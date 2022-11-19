@@ -1,7 +1,7 @@
 package entidades;
+
 import java.util.List;
 
-public interface QuestionarioI extends RepositoryI<PerguntaI>
-{
-   List<PerguntaI> getPerguntas();
+public abstract class QuestionarioI extends RepositoryI<PerguntaI> {
+   public abstract List<PerguntaI> getPerguntas();
 }

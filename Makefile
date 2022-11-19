@@ -1,6 +1,6 @@
 Compile: Liking 
-	javac App.java
+	javac Aplicacao.java
 Liking: Packages
-	javac -d . ./entidades/*.java ./controle/*.java ./fronteira/*.java
+	javac -d . ./entidades/*.java ./controle/*.java
 Packages: 
-	javac ./entidades/*.java ./controle/*.java ./fronteira/*.java
+	javac ./entidades/*.java ./controle/*.java
