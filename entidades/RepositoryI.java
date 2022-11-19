@@ -1,7 +1,7 @@
 package entidades;
+
 import java.util.List;
 
-interface RepositoryI<Tipo>
-{
-   List<Tipo> findAll();
+public abstract class RepositoryI<Tipo> {
+   public abstract List<Tipo> findAll();
 }

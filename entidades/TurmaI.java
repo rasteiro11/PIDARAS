@@ -1,7 +1,7 @@
 package entidades;
+
 import java.util.List;
 
-public interface TurmaI extends RepositoryI<AprendizI>
-{
-   List<AprendizI> getAprendizes();
+public abstract class TurmaI extends RepositoryI<AprendizI> {
+   public abstract List<AprendizI> getAprendizes();
 }
