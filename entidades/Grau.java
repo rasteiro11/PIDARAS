@@ -1,3 +1,5 @@
+package entidades;
+
 public enum Grau
 {
     F(4),

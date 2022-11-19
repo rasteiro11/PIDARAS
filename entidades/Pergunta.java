@@ -1,3 +1,5 @@
+package entidades;
+
 public class Pergunta implements PerguntaI
 {
    @Override

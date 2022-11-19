@@ -1,3 +1,5 @@
+package entidades;
+
 public class Alternativa implements AlternativaI
 {
    @Override

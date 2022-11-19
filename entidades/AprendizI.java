@@ -1,3 +1,5 @@
+package entidades;
+
 public interface AprendizI
 {
    String getNome();

@@ -1,3 +1,5 @@
+package entidades;
+
 public interface PerguntaI
 {
    public Grau getNivel();
