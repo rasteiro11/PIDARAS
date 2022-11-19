@@ -1,9 +1,9 @@
 package entidades;
 
-public interface PerguntaI
+public abstract class PerguntaI
 {
-   public Grau getNivel();
-   public String getEnunciado();
-   public AlternativaI getResponsta();
-   public AlternativaI[] getAlternativas();
+   public abstract Grau getNivel();
+   public abstract String getEnunciado();
+   public abstract AlternativaI getResponsta();
+   public abstract AlternativaI[] getAlternativas();
 }

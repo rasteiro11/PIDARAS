@@ -1,6 +1,7 @@
 package controle;
+import java.util.List;
 
-public interface SorteioI<Tipo>
+public abstract class SorteioI<Tipo>
 {
-   public Tipo sortear();
+   public abstract Tipo sortear(List<Tipo> lista);
 }

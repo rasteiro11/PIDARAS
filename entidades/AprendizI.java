@@ -1,8 +1,10 @@
 package entidades;
 
-public interface AprendizI
+public abstract class AprendizI
 {
-   String getNome();
-   String getRa();
-   boolean estaPresente();
+   public abstract String getNome();
+   public abstract String getRa();
+   public abstract int getPontuacao();
+   public abstract void setPontuacao(int pontuacao);
+   public abstract boolean estaPresente();
 }

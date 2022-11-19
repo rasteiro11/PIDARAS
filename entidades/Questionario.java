@@ -1,7 +1,7 @@
 package entidades;
 import java.util.List;
 
-public class Questionario implements QuestionarioI
+public class Questionario extends QuestionarioI
 {
    @Override
    public List<PerguntaI> findAll() {

@@ -1,6 +1,6 @@
 package entidades;
 
-public class Pergunta implements PerguntaI
+public class Pergunta extends PerguntaI
 {
    @Override
    public AlternativaI[] getAlternativas() {

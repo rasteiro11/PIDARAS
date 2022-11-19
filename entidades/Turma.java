@@ -1,17 +1,47 @@
 package entidades;
+import java.util.ArrayList;
 import java.util.List;
 
-public class Turma implements TurmaI
+public class Turma <Aluno extends AprendizI>  extends TurmaI<Aluno>
 {
-   @Override
-   public List<AprendizI> getAprendizes() {
-      // Auto-generated method stub
-      return null;
+   List<Aluno> aprendizes;
+
+   public Turma()
+   {
+      aprendizes = new ArrayList<>();
    }
 
    @Override
-   public List<AprendizI> findAll() {
+   public Aluno acharAprendiz(String ra)
+   {
+      int i = 0, size = aprendizes.size();
+      Aluno aluno = null;
+      if(i < size)
+      {
+         do
+         {
+            aluno = aprendizes.get(i);
+            i++;
+         }
+         while(aluno.getRa().equals(ra) && i < size);
+
+         if(!aluno.getRa().equals(ra))
+            aluno = null;
+      }
+
+      return aluno;
+   }
+
+   @Override
+   public List<Aluno> findAll()
+   {
       // Auto-generated method stub
-      return null;
+      return aprendizes;
+   }
+
+   @Override
+   public void novoAprendiz(Aluno aprendiz)
+   {
+      aprendizes.add(aprendiz);
    }
 }
