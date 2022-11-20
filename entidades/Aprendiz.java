@@ -1,42 +1,36 @@
 package entidades;
 
-public class Aprendiz extends AprendizI
-{
+public class Aprendiz extends AprendizI {
    String nome;
    String ra;
    int pontuacao;
    boolean presente;
 
-   public Aprendiz(String nome, String ra)
-   {
+   public Aprendiz(String nome, String ra) {
       this.nome = nome;
       this.ra = ra;
       this.pontuacao = 0;
       this.presente = true;
    }
 
-   public Aprendiz(String nome, String ra, boolean presente)
-   {
-      this.nome = nome; 
+   public Aprendiz(String nome, String ra, boolean presente) {
+      this.nome = nome;
       this.ra = ra;
       this.pontuacao = 0;
    }
 
-   @Override
-   public boolean estaPresente()
-   {
+   public boolean estaPresente() {
+      // Auto-generated method stub
       return presente;
    }
 
-   @Override
-   public String getNome()
-   {
+   public String getNome() {
+      // Auto-generated method stub
       return nome;
    }
 
-   @Override
-   public String getRa()
-   {
+   public String getRa() {
+      // Auto-generated method stub
       return ra;
    }
 

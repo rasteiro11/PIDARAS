@@ -1,8 +1,6 @@
-n : Jonas Edward Tashiro
-ra : 00297769
+Jonas Edward Tashiro, 00297769, true
 
-n : Luan Lopes Barbosa de Almeida 
-ra : 00297865
+Luan Lopes Barbosa de Almeida, 00297865, true
 
-n : Rafael Melloni Chacon Arnone
-ra : 00297909
+Rafael Melloni Chacon Arnone, 00297909, false 
+
