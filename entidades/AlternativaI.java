@@ -1,6 +1,6 @@
 package entidades;
 
-public interface AlternativaI
+public abstract class AlternativaI
 {
-   public String getDescricao();
+   public abstract String getDescricao();
 }

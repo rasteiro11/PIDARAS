@@ -2,6 +2,8 @@ package entidades;
 
 import java.util.List;
 
-public abstract class QuestionarioI extends RepositoryI<PerguntaI> {
+import controle.SorteavelI;
+
+public abstract class QuestionarioI extends RepositoryI<PerguntaI> implements SorteavelI<PerguntaI> {
    public abstract List<PerguntaI> getPerguntas();
 }

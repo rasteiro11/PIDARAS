@@ -6,6 +6,10 @@ public class Aprendiz extends AprendizI {
    int pontuacao;
    boolean presente;
 
+   public Aprendiz() {
+
+   }
+
    public Aprendiz(String nome, String ra) {
       this.nome = nome;
       this.ra = ra;
@@ -35,14 +39,17 @@ public class Aprendiz extends AprendizI {
    }
 
    @Override
-   public int getPontuacao()
-   {
+   public int getPontuacao() {
       return pontuacao;
    }
-   
+
    @Override
-   public void setPontuacao(int pontuacao)
-   {
+   public void setPontuacao(int pontuacao) {
       this.pontuacao = pontuacao;
+   }
+
+   @Override
+   public AprendizI construirAluno(String nome, String ra, boolean presenca) {
+      return new Aprendiz(nome, ra, presente);
    }
 }
