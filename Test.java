@@ -61,5 +61,18 @@ public class Test {
             System.out.println(aprendizI.getNome());
             System.out.println(aprendizI.getRa());
         }
+
+        List<PerguntaI> hist = new ArrayList<>();
+
+        PerguntaI[] batch = q.sortear(hist);
+        for (var fodase : batch) {
+            System.out.println(fodase.getEnunciado());
+        }
+
+        PerguntaI[] batch_2 = q.sortear(hist);
+        for (var fodase : batch_2) {
+            System.out.println(fodase.getEnunciado());
+        }
+
     }
 }

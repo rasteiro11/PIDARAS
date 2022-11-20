@@ -7,6 +7,10 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Random;
+
+import controle.SorteavelI;
+import controle.Sorteio;
 
 public class Questionario extends QuestionarioI {
 
@@ -86,6 +90,33 @@ public class Questionario extends QuestionarioI {
    @Override
    public List<PerguntaI> getPerguntas() {
       return this.perguntas;
+   }
+
+   // WARNING GET BACK HERE
+   @Override
+   public PerguntaI[] sortear(List<PerguntaI> historico) {
+      // Auto-generated method stub
+
+      PerguntaI[] batch = new Pergunta[3];
+      int numBatches = this.perguntas.size() / 3;
+      Random r = new Random();
+      int rand;
+      PerguntaI perguntaTemp;
+
+      do {
+         rand = r.nextInt(numBatches);
+         perguntaTemp = this.perguntas.get(rand * 3);
+      } while (historico.contains(perguntaTemp));
+
+      batch[0] = this.perguntas.get(rand * 3);
+      batch[1] = this.perguntas.get(rand * 3 + 1);
+      batch[2] = this.perguntas.get(rand * 3 + 2);
+
+      historico.add(batch[0]);
+      historico.add(batch[1]);
+      historico.add(batch[2]);
+
+      return batch;
    }
 
 }

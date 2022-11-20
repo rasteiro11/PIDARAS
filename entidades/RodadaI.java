@@ -23,4 +23,10 @@ public interface RodadaI {
 
    void desistir();
 
+   void parar();
+
+   boolean getParar();
+
+   void getNextPergunta();
+
 }
