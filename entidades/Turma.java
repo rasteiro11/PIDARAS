@@ -33,9 +33,8 @@ public class Turma <Aluno extends AprendizI>  extends TurmaI<Aluno>
    }
 
    @Override
-   public List<Aluno> findAll()
+   public List<Aluno> carregarArquivo(String fileName)
    {
-      // Auto-generated method stub
       return aprendizes;
    }
 

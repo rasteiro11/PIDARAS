@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class Questionario extends QuestionarioI {
@@ -13,14 +14,14 @@ public class Questionario extends QuestionarioI {
 
    public Questionario()
    {
-      this.perguntas = this.findAll();
+      this.perguntas = new ArrayList<>();
    }
 
    @Override
-   public List<PerguntaI> findAll()
+   public List<PerguntaI> carregarArquivo(String fileName)
    {
       List<PerguntaI> perguntasTemp = new ArrayList<>();
-      try (BufferedReader br = Files.newBufferedReader(Paths.get("./controle/Perguntas.txt")))
+      try (BufferedReader br = Files.newBufferedReader(Paths.get(fileName)))
       {
          String tema = "";
          String line;
@@ -37,7 +38,7 @@ public class Questionario extends QuestionarioI {
                   {
                      case 't':
                         tema = line.split(":")[1].trim();
-                        p.setTema(line.split(":")[1].trim());
+                        p.setTema(tema);
                         break;
                      case 'p':
                         switch (line.split(":")[1].trim())
@@ -62,16 +63,13 @@ public class Questionario extends QuestionarioI {
                         break;
                      case 'a':
                         if (altPtr <= 2)
-                        {
                            p.setAlternativas(new Alternativa(line.split(":")[1].trim()), altPtr);
-                           altPtr++;
-                        } 
                         else 
                         {
                            altPtr = 0;
                            p.setAlternativas(new Alternativa(line.split(":")[1].trim()), altPtr);
-                           altPtr++;
                         }
+                        altPtr++;
                         break;
                      default:
                         break;
@@ -96,6 +94,7 @@ public class Questionario extends QuestionarioI {
          System.exit(1);
       }
 
+      this.perguntas = perguntasTemp;
       return perguntasTemp;
    }
 
