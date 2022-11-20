@@ -16,11 +16,11 @@ r : P3 - r
 a : P3 - a1
 a : P3 - a2
 a : P3 - a3
-
+ 
 t : Pepega 
 p : F : o que e um Pepega?
 r : Best Emote 
-a : pogman 
+a : PogMan 
 a : GIGACHAD  
 a : PauseChamp 
 
@@ -35,7 +35,7 @@ r : P3 - r
 a : P3 - a1
 a : P3 - a2
 a : P3 - a3
- 
+
 t : Pogchamp 
 p : F : o que e um Pogchamp?
 r : receita de bolo

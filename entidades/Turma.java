@@ -14,7 +14,6 @@ public class Turma extends TurmaI<AprendizI> {
       aprendizes = this.carregarArquivo(fileName);
    }
 
-   @Override
    public AprendizI acharAprendiz(String ra) {
       int i = 0, size = aprendizes.size();
       AprendizI aluno = null;
@@ -34,7 +33,7 @@ public class Turma extends TurmaI<AprendizI> {
    @Override
    public List<AprendizI> carregarArquivo(String fileName) {
       List<AprendizI> aprendizTemp = new ArrayList<>();
-      try (BufferedReader br = Files.newBufferedReader(Paths.get("./controle/Turma.txt"))) {
+      try (BufferedReader br = Files.newBufferedReader(Paths.get(fileName))) {
          String line;
          try {
             while ((line = br.readLine()) != null) {

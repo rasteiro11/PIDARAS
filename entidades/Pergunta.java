@@ -1,7 +1,7 @@
 package entidades;
 
-public class Pergunta extends PerguntaI {
-
+public class Pergunta extends PerguntaI
+{
    private Grau nivel;
    private String enunciado;
    private AlternativaI[] alternativas;

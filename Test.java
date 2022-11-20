@@ -27,7 +27,7 @@ public class Test {
         System.out.println("Name of Retard: " + A.getNome());
         System.out.println("RA: " + A.getRa());
 
-        Turma BasedLads = new Turma("./controle/Turma.txt");
+        Turma BasedLads = new Turma("./arquivos/Turma.txt");
         BasedLads.novoAprendiz(A);
         BasedLads.novoAprendiz(B);
         BasedLads.novoAprendiz(C);
@@ -35,11 +35,11 @@ public class Test {
         BasedLads.novoAprendiz(E);
 
         Sorteio<AprendizI> S = new Sorteio<>();
-        AprendizI F = S.sortear(BasedLads.carregarArquivo("./controle/Turma.txt"));
+        AprendizI F = S.sortear(BasedLads.getAprendizes());
         System.out.println("Got from Random class the following Name -> " + F.getNome());
         System.out.println("Got from Random class the following RA -> " + F.getRa());
 
-        QuestionarioI q = new Questionario("./controle/Perguntas.txt");
+        QuestionarioI q = new Questionario("./arquivos/Perguntas.txt");
         // for (PerguntaI var : q.getPerguntas()) {
         // // System.out.println("ENUNCIADO: " + var.getEnunciado());
         // // System.out.println("RESPOSTA: " + var.getResponsta().getDescricao());
