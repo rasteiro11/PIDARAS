@@ -24,15 +24,34 @@ a : PogMan
 a : GIGACHAD  
 a : PauseChamp 
 
-p : M : P2
+p : M : o que e um Pepega 2?
 r : P2 - r
 a : P2 - a1
 a : P2 - a2
 a : P2 - a3
 
-p : D : P3
+p : D : o que e um Pepega 3?
 r : P3 - r
 a : P3 - a1
 a : P3 - a2
 a : P3 - a3
 
+t : Pogchamp 
+p : F : o que e um Pogchamp?
+r : receita de bolo
+a : e um programa
+a : e um metodo
+a : e um procedimento
+
+p : M : o que e um Pogchamp 2?
+r : P2 - r
+a : P2 - a1
+a : P2 - a2
+a : P2 - a3
+
+p : D : o que e um Pogchamp 3?
+r : P3 - r
+a : P3 - a1
+a : P3 - a2
+a : P3 - a3
+ 

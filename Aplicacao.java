@@ -8,19 +8,13 @@ import fronteira.Cmd;
 /**
  * Aplicacao
  */
-public class Aplicacao
-{
-    public static void main(String[] args)
-    {
-        Turma sorteados = new Turma();
-        Turma n_sorteados = null;
-        Questionario questoes = new Questionario();
+public class Aplicacao {
+    public static void main(String[] args) {
+        Turma sorteados;
+        Turma n_sorteados;
+        Questionario questoes = new Questionario("./arquivos/Perguntas.txt");
         questoes.carregarArquivo("./arquivos/Perguntas.txt");
-        sorteados.carregarArquivo("./arquivos/Turma.txt");
-        Sorteio<Aprendiz> sorteio_a = new Sorteio<>();
-        Sorteio<Pergunta> sorteio_p = new Sorteio<>();
+        /* Load from file for Turma and Questionario (should be in controle package) */
 
-        /*Mostar Tela com comandos*/
-        Cmd tela = new Cmd();
     }
 }

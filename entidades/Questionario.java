@@ -7,42 +7,38 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Random;
+
+import controle.SorteavelI;
+import controle.Sorteio;
 
 public class Questionario extends QuestionarioI {
 
    private List<PerguntaI> perguntas;
 
-   public Questionario()
-   {
-      this.perguntas = new ArrayList<>();
+   public Questionario(String fileName) {
+      this.carregarArquivo(fileName);
    }
 
    @Override
-   public List<PerguntaI> carregarArquivo(String fileName)
-   {
+   public List<PerguntaI> carregarArquivo(String fileName) {
       List<PerguntaI> perguntasTemp = new ArrayList<>();
-      try (BufferedReader br = Files.newBufferedReader(Paths.get(fileName)))
-      {
+      try (BufferedReader br = Files.newBufferedReader(Paths.get(fileName))) {
          String tema = "";
          String line;
          Grau nivel = Grau.D;
          int altPtr = 0;
          PerguntaI p = new Pergunta();
-         try
-         {
-            while ((line = br.readLine()) != null)
-            {
-               if (!(line.isBlank() || line.isEmpty()))
-               {
-                  switch (line.charAt(0))
-                  {
+         try {
+            while ((line = br.readLine()) != null) {
+               if (!(line.isBlank() || line.isEmpty())) {
+                  switch (line.charAt(0)) {
                      case 't':
                         tema = line.split(":")[1].trim();
                         p.setTema(tema);
                         break;
                      case 'p':
-                        switch (line.split(":")[1].trim())
-                        {
+                        switch (line.split(":")[1].trim()) {
                            case "F":
                               nivel = Grau.F;
                               break;
@@ -64,8 +60,7 @@ public class Questionario extends QuestionarioI {
                      case 'a':
                         if (altPtr <= 2)
                            p.setAlternativas(new Alternativa(line.split(":")[1].trim()), altPtr);
-                        else 
-                        {
+                        else {
                            altPtr = 0;
                            p.setAlternativas(new Alternativa(line.split(":")[1].trim()), altPtr);
                         }
@@ -74,22 +69,16 @@ public class Questionario extends QuestionarioI {
                      default:
                         break;
                   }
-               }
-               else 
-               {
+               } else {
                   perguntasTemp.add(p);
                   p = new Pergunta();
                   p.setTema(tema);
                }
             }
-         }
-         catch (IOException e)
-         {
+         } catch (IOException e) {
             System.err.format("IOException: %s%n", e);
          }
-      } 
-      catch (Exception e)
-      {
+      } catch (Exception e) {
          System.err.format("SOMETHING WENT WRONG");
          System.exit(1);
       }
@@ -101,6 +90,33 @@ public class Questionario extends QuestionarioI {
    @Override
    public List<PerguntaI> getPerguntas() {
       return this.perguntas;
+   }
+
+   // WARNING GET BACK HERE
+   @Override
+   public PerguntaI[] sortear(List<PerguntaI> historico) {
+      // Auto-generated method stub
+
+      PerguntaI[] batch = new Pergunta[3];
+      int numBatches = this.perguntas.size() / 3;
+      Random r = new Random();
+      int rand;
+      PerguntaI perguntaTemp;
+
+      do {
+         rand = r.nextInt(numBatches);
+         perguntaTemp = this.perguntas.get(rand * 3);
+      } while (historico.contains(perguntaTemp));
+
+      batch[0] = this.perguntas.get(rand * 3);
+      batch[1] = this.perguntas.get(rand * 3 + 1);
+      batch[2] = this.perguntas.get(rand * 3 + 2);
+
+      historico.add(batch[0]);
+      historico.add(batch[1]);
+      historico.add(batch[2]);
+
+      return batch;
    }
 
 }
