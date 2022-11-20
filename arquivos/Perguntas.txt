@@ -12,16 +12,15 @@ a : P2 - a2
 a : P2 - a3
 
 p : D : P3
-<<<<<<< HEAD
 r : P3 - r
 a : P3 - a1
 a : P3 - a2
 a : P3 - a3
-
+ 
 t : Pepega 
 p : F : o que e um Pepega?
 r : Best Emote 
-a : pogman 
+a : PogMan 
 a : GIGACHAD  
 a : PauseChamp 
 
@@ -32,29 +31,8 @@ a : P2 - a2
 a : P2 - a3
 
 p : D : P3
-=======
->>>>>>> develop/feat-class-abstract
 r : P3 - r
 a : P3 - a1
 a : P3 - a2
 a : P3 - a3
- 
-t : fundamentos_2
-p : F : o que e um algoritmo?
-r : receita de bolo
-a : e um programa
-a : e um metodo
-a : e um procedimento
 
-p : M : P2
-r : P2 - r
-a : P2 - a1
-a : P2 - a2
-a : P2 - a3
-
-p : D : P3
-r : P3 - r
-a : P3 - a1
-a : P3 - a2
-a : P3 - a3
- 

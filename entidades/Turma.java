@@ -2,9 +2,9 @@ package entidades;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Turma <Aluno extends AprendizI>  extends TurmaI<Aluno>
+public class Turma extends TurmaI<AprendizI>
 {
-   List<Aluno> aprendizes;
+   List<AprendizI> aprendizes;
 
    public Turma()
    {
@@ -12,10 +12,10 @@ public class Turma <Aluno extends AprendizI>  extends TurmaI<Aluno>
    }
 
    @Override
-   public Aluno acharAprendiz(String ra)
+   public AprendizI acharAprendiz(String ra)
    {
       int i = 0, size = aprendizes.size();
-      Aluno aluno = null;
+      AprendizI aluno = null;
       if(i < size)
       {
          do
@@ -33,13 +33,13 @@ public class Turma <Aluno extends AprendizI>  extends TurmaI<Aluno>
    }
 
    @Override
-   public List<Aluno> carregarArquivo(String fileName)
+   public List<AprendizI> carregarArquivo(String fileName)
    {
       return aprendizes;
    }
 
    @Override
-   public void novoAprendiz(Aluno aprendiz)
+   public void novoAprendiz(AprendizI aprendiz)
    {
       aprendizes.add(aprendiz);
    }
