@@ -1,7 +1,5 @@
 package entidades;
 
-import java.util.concurrent.atomic.AtomicMarkableReference;
-
 public class Pergunta extends PerguntaI {
 
    private Grau nivel;
@@ -52,25 +50,25 @@ public class Pergunta extends PerguntaI {
 
    @Override
    public void setNivel(Grau g) {
-      // TODO Auto-generated method stub
+      // Auto-generated method stub
       this.nivel = g;
    }
 
    @Override
    public void setEnunciado(String enunciado) {
-      // TODO Auto-generated method stub
+      // Auto-generated method stub
       this.enunciado = enunciado;
    }
 
    @Override
    public void setResponsta(AlternativaI alternativa) {
-      // TODO Auto-generated method stub
+      // Auto-generated method stub
       this.alternativas[3] = alternativa;
    }
 
    @Override
    public void setTema(String tema) {
-      // TODO Auto-generated method stub
+      // Auto-generated method stub
       this.tema = tema;
    }
 

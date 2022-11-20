@@ -11,35 +11,37 @@ public class Questionario extends QuestionarioI {
 
    private List<PerguntaI> perguntas;
 
-   public Questionario() {
+   public Questionario()
+   {
       this.perguntas = this.findAll();
    }
 
    @Override
-   public List<PerguntaI> findAll() {
-      // Auto-generated method stub
+   public List<PerguntaI> findAll()
+   {
       List<PerguntaI> perguntasTemp = new ArrayList<>();
-      try (BufferedReader br = Files.newBufferedReader(Paths.get("./controle/Perguntas.txt"))) {
-
-         String enunciado = "";
+      try (BufferedReader br = Files.newBufferedReader(Paths.get("./controle/Perguntas.txt")))
+      {
          String tema = "";
          String line;
          Grau nivel = Grau.D;
-         AlternativaI resposta;
-         PerguntaI pergunta;
          int altPtr = 0;
          PerguntaI p = new Pergunta();
-         // read line by line
-         try {
-            while ((line = br.readLine()) != null) {
-               if (!(line.isBlank() || line.isEmpty())) {
-                  switch (line.charAt(0)) {
+         try
+         {
+            while ((line = br.readLine()) != null)
+            {
+               if (!(line.isBlank() || line.isEmpty()))
+               {
+                  switch (line.charAt(0))
+                  {
                      case 't':
                         tema = line.split(":")[1].trim();
                         p.setTema(line.split(":")[1].trim());
                         break;
                      case 'p':
-                        switch (line.split(":")[1].trim()) {
+                        switch (line.split(":")[1].trim())
+                        {
                            case "F":
                               nivel = Grau.F;
                               break;
@@ -59,10 +61,13 @@ public class Questionario extends QuestionarioI {
                         p.setResponsta(new Alternativa(line.split(":")[1].trim()));
                         break;
                      case 'a':
-                        if (altPtr <= 2) {
+                        if (altPtr <= 2)
+                        {
                            p.setAlternativas(new Alternativa(line.split(":")[1].trim()), altPtr);
                            altPtr++;
-                        } else {
+                        } 
+                        else 
+                        {
                            altPtr = 0;
                            p.setAlternativas(new Alternativa(line.split(":")[1].trim()), altPtr);
                            altPtr++;
@@ -71,17 +76,22 @@ public class Questionario extends QuestionarioI {
                      default:
                         break;
                   }
-               } else {
+               }
+               else 
+               {
                   perguntasTemp.add(p);
                   p = new Pergunta();
                   p.setTema(tema);
                }
             }
-         } catch (IOException e) {
+         }
+         catch (IOException e)
+         {
             System.err.format("IOException: %s%n", e);
          }
-
-      } catch (Exception e) {
+      } 
+      catch (Exception e)
+      {
          System.err.format("SOMETHING WENT WRONG");
          System.exit(1);
       }

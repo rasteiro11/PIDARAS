@@ -1,0 +1,6 @@
+Jonas Edward Tashiro, 00297769, true
+
+Luan Lopes Barbosa de Almeida, 00297865, true
+
+Rafael Melloni Chacon Arnone, 00297909, false 
+
