@@ -8,10 +8,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Turma<Aluno extends AprendizI> extends TurmaI<Aluno> {
-   private List<Aluno> aprendizes;
+   List<Aluno> aprendizes;
 
-   public Turma(String fileName) {
-      aprendizes = this.carregarArquivo(fileName);
+   public Turma() {
+      aprendizes = ;
    }
 
    @Override
