@@ -7,17 +7,17 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Turma<Aluno extends AprendizI> extends TurmaI<Aluno> {
-   private List<Aluno> aprendizes;
+public class Turma extends TurmaI<AprendizI> {
+   private List<AprendizI> aprendizes;
 
    public Turma(String fileName) {
       aprendizes = this.carregarArquivo(fileName);
    }
 
    @Override
-   public Aluno acharAprendiz(String ra) {
+   public AprendizI acharAprendiz(String ra) {
       int i = 0, size = aprendizes.size();
-      Aluno aluno = null;
+      AprendizI aluno = null;
       if (i < size) {
          do {
             aluno = aprendizes.get(i);
@@ -32,7 +32,7 @@ public class Turma<Aluno extends AprendizI> extends TurmaI<Aluno> {
    }
 
    @Override
-   public List<Aluno> carregarArquivo(String fileName) {
+   public List<AprendizI> carregarArquivo(String fileName) {
       List<AprendizI> aprendizTemp = new ArrayList<>();
       try (BufferedReader br = Files.newBufferedReader(Paths.get("./controle/Turma.txt"))) {
          String line;
@@ -55,16 +55,18 @@ public class Turma<Aluno extends AprendizI> extends TurmaI<Aluno> {
          System.exit(1);
       }
 
-      return aprendizes;
+      this.aprendizes = aprendizTemp;
+
+      return aprendizTemp;
    }
 
    @Override
-   public void novoAprendiz(Aluno aprendiz) {
+   public void novoAprendiz(AprendizI aprendiz) {
       aprendizes.add(aprendiz);
    }
 
    @Override
-   public List<Aluno> getAprendizes() {
+   public List<AprendizI> getAprendizes() {
       return this.aprendizes;
    }
 }

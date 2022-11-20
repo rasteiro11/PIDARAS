@@ -9,8 +9,8 @@ import entidades.Turma;
  */
 public class Aplicacao {
     public static void main(String[] args) {
-        Turma<Aprendiz> sorteados;
-        Turma<Aprendiz> n_sorteados;
+        Turma sorteados;
+        Turma n_sorteados;
         Questionario questoes = new Questionario("./controle/Perguntas.txt");
         questoes.carregarArquivo("./controle/Perguntas.txt");
         /* Load from file for Turma and Questionario (should be in controle package) */

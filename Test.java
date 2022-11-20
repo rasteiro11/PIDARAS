@@ -27,7 +27,7 @@ public class Test {
         System.out.println("Name of Retard: " + A.getNome());
         System.out.println("RA: " + A.getRa());
 
-        Turma<AprendizI> BasedLads = new Turma<>("./controle/Turma.txt");
+        Turma BasedLads = new Turma("./controle/Turma.txt");
         BasedLads.novoAprendiz(A);
         BasedLads.novoAprendiz(B);
         BasedLads.novoAprendiz(C);
