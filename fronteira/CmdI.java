@@ -1,4 +1,5 @@
 package fronteira;
+import entidades.AprendizI;
 import entidades.PerguntaI;
 
 /**
@@ -6,11 +7,6 @@ import entidades.PerguntaI;
  */
 public abstract class CmdI<P extends PerguntaI>
 {
-    /*
-     * respostaUsuario: 
-     * Pre:
-     * Post:
-     * */
-    protected abstract char respostaUsuario();
-    public abstract char mostrarOpcoes(P pergunta, int[] permutacao);
+    public abstract char opcoesUsuario(P pergunta, int[] permutacao);
+    public abstract void monstarAprendiz(AprendizI aprendizI);
 }

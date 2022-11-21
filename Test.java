@@ -1,14 +1,8 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.List;
-
 import controle.Sorteio;
 import entidades.AlternativaI;
 import entidades.Aprendiz;
 import entidades.AprendizI;
+import entidades.Grau;
 import entidades.PerguntaI;
 import entidades.Questionario;
 import entidades.QuestionarioI;
@@ -35,7 +29,7 @@ public class Test {
         BasedLads.novoAprendiz(E);
 
         Sorteio<AprendizI> S = new Sorteio<>();
-        AprendizI F = S.sortear(BasedLads.getAprendizes());
+        AprendizI F = S.sortearLista(BasedLads.getAprendizes());
         System.out.println("Got from Random class the following Name -> " + F.getNome());
         System.out.println("Got from Random class the following RA -> " + F.getRa());
 
@@ -62,17 +56,16 @@ public class Test {
             System.out.println(aprendizI.getRa());
         }
 
-        List<PerguntaI> hist = new ArrayList<>();
-
-        PerguntaI[] batch = q.sortear(hist);
+        PerguntaI[] batch = q.sortear();
         for (var fodase : batch) {
             System.out.println(fodase.getEnunciado());
         }
 
-        PerguntaI[] batch_2 = q.sortear(hist);
+        PerguntaI[] batch_2 = q.sortear();
         for (var fodase : batch_2) {
             System.out.println(fodase.getEnunciado());
         }
 
+        System.out.println("does this piece of shit even work - > " + Grau.D.getGrau());
     }
 }

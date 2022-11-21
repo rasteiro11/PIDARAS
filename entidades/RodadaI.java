@@ -1,32 +1,17 @@
 package entidades;
 
-import java.util.List;
-
-public interface RodadaI {
-   List<PerguntaI> getPerguntas();
-
-   List<PerguntaI> getHistoricoDePerguntas();
-
-   List<AprendizI> getHistoricoDeAprendizes();
-
+public interface RodadaI
+{
    AprendizI getAprendizAtual();
-
-   void setAprendizAtual(AprendizI a);
-
    PerguntaI getPerguntaAtual();
-
-   void setPerguntaAtual(PerguntaI p);
-
    Grau getGrauPerguntaAtual();
-
-   void pedirAjuda();
-
-   void desistir();
-
-   void parar();
-
-   boolean getParar();
-
-   void getNextPergunta();
-
+   void fim();
+   void setNextPergunta();
+   void setRespStatus(boolean status);
+   boolean getRespStatus();
+   void setFim(boolean bool);
+   boolean getFim();
+   void setAjuda(boolean bool);
+   boolean getAjuda(boolean bool);
+   void setAjudante(AprendizI ajudante);
 }

@@ -54,7 +54,7 @@ public class Pergunta extends PerguntaI
    }
 
    @Override
-   public void setResponsta(AlternativaI alternativa) {
+   public void setResposta(AlternativaI alternativa) {
       this.alternativas[3] = alternativa;
    }
 

@@ -1,36 +1,49 @@
 package fronteira;
-import entidades.Pergunta;
+import entidades.AprendizI;
+import entidades.PerguntaI;
 import java.util.Scanner;
 
 /**
  * Cmd
  */
-public class Cmd extends CmdI<Pergunta>
+public class Cmd extends CmdI<PerguntaI>
 {
-    public char mostrarOpcoes(Pergunta pergunta, int[] permutacao)
+    Scanner input;
+
+    public Cmd()
     {
-        System.out.println(pergunta.getTema());   
-        System.out.println(pergunta.getEnunciado());   
-        System.out.println(pergunta.getAlternativas()[permutacao[0]]);      
-        System.out.println(pergunta.getAlternativas()[permutacao[1]]);
-        System.out.println(pergunta.getAlternativas()[permutacao[2]]);
-        System.out.println(pergunta.getAlternativas()[permutacao[3]]);
-        return respostaUsuario();
+        input = new Scanner(System.in);
     }
 
-    protected char respostaUsuario()
+    public char opcoesUsuario(PerguntaI pergunta, int[] permutacao)
     {
-        Scanner input;
         char c;
+
         do
         {
-            input = new Scanner(System.in);
+            System.out.println(pergunta.getTema());   
+            System.out.println(pergunta.getEnunciado());   
+            System.out.println("a: " + pergunta.getAlternativas()[permutacao[0]].getDescricao());      
+            System.out.println("b: " + pergunta.getAlternativas()[permutacao[1]].getDescricao());
+            System.out.println("c: " + pergunta.getAlternativas()[permutacao[2]].getDescricao());
+            System.out.println("d: " + pergunta.getAlternativas()[permutacao[3]].getDescricao());
+            System.out.println("e: Ajuda");
+            System.out.println("f: Parada");
+            System.err.print("Escolha: ");
             c = input.next().toLowerCase().charAt(0);
-            if(c >= 'a' && c <= 'f')
+            if(c < 'a' || c > 'f')
                 System.out.println("Escolha incorreta! -> Sao permitidos somente as letras a,b,c,e,d,f\n");
         }
-        while(c >= 'a' && c <= 'f');
-        input.close();
-        return c;
+        while(c < 'a' || c > 'f');
+        return c; 
     }
+
+    @Override
+    public void monstarAprendiz(AprendizI aprendizI)
+    {
+        System.out.println("O Aprendiz Sorteado foi: ");
+        System.out.println(' ' + aprendizI.getNome()); 
+        System.out.println(' ' + aprendizI.getRa()); 
+    }
+
 }

@@ -6,10 +6,6 @@ public class Aprendiz extends AprendizI {
    int pontuacao;
    boolean presente;
 
-   public Aprendiz() {
-
-   }
-
    public Aprendiz(String nome, String ra) {
       this.nome = nome;
       this.ra = ra;
@@ -52,4 +48,17 @@ public class Aprendiz extends AprendizI {
    public AprendizI construirAluno(String nome, String ra, boolean presenca) {
       return new Aprendiz(nome, ra, presente);
    }
+
+   //@Override
+   //public boolean equals(AprendizI aprendiz) {
+   //   System.out.println("\nINSIDE BOOLEAN");
+   //   System.out.println(aprendiz.getNome());
+   //   System.out.println(nome);
+   //   System.out.println("nome bool -> " + (nome.equals(aprendiz.getNome())));
+   //   System.out.println("ra bool -> " + (ra.equals(aprendiz.getRa())));
+   //   System.out.println("pont bool -> " + (pontuacao == aprendiz.getPontuacao()));
+   //   System.out.println();
+   //   return nome.equals(aprendiz.getNome()) && ra.equals(aprendiz.getRa()) && pontuacao == aprendiz.getPontuacao();
+   //}
+
 }

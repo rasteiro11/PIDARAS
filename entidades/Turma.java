@@ -10,15 +10,23 @@ import java.util.List;
 public class Turma extends TurmaI<AprendizI> {
    private List<AprendizI> aprendizes;
 
+   public Turma()
+   {
+      aprendizes = new ArrayList<>();
+   }
+
    public Turma(String fileName) {
       aprendizes = this.carregarArquivo(fileName);
    }
 
-   public AprendizI acharAprendiz(String ra) {
+   public AprendizI acharAprendiz(String ra)
+   {
       int i = 0, size = aprendizes.size();
       AprendizI aluno = null;
-      if (i < size) {
-         do {
+      if (i < size)
+      {
+         do
+         {
             aluno = aprendizes.get(i);
             i++;
          } while (aluno.getRa().equals(ra) && i < size);
@@ -62,6 +70,24 @@ public class Turma extends TurmaI<AprendizI> {
    @Override
    public void novoAprendiz(AprendizI aprendiz) {
       aprendizes.add(aprendiz);
+   }
+
+   @Override
+   public void removerAprendiz(AprendizI aprendizI)
+   {
+      int i = 0, size = aprendizes.size();
+      AprendizI aprendizTemp = null;
+      if(size > 0)
+      {
+         do
+         {
+            aprendizTemp = aprendizes.get(i);
+            i++;
+         }while(!aprendizTemp.equals(aprendizI) && i < size);
+
+         if(aprendizTemp.equals(aprendizI))
+            aprendizes.remove(i - 1);
+      }
    }
 
    @Override

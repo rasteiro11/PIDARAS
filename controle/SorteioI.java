@@ -3,5 +3,5 @@ import java.util.List;
 
 public abstract class SorteioI<Tipo>
 {
-   public abstract Tipo sortear(List<Tipo> lista);
+   public abstract Tipo sortearLista(List<Tipo> lista);
 }
