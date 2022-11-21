@@ -7,7 +7,8 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Turma extends TurmaI<AprendizI> {
+public class Turma extends TurmaI
+{
    private List<AprendizI> aprendizes;
 
    public Turma()
@@ -39,14 +40,19 @@ public class Turma extends TurmaI<AprendizI> {
    }
 
    @Override
-   public List<AprendizI> carregarArquivo(String fileName) {
+   public List<AprendizI> carregarArquivo(String fileName)
+   {
       List<AprendizI> aprendizTemp = new ArrayList<>();
-      try (BufferedReader br = Files.newBufferedReader(Paths.get(fileName))) {
+      try (BufferedReader br = Files.newBufferedReader(Paths.get(fileName)))
+      {
          String line;
-         try {
-            while ((line = br.readLine()) != null) {
+         try
+         {
+            while ((line = br.readLine()) != null)
+            {
                String[] props = new String[3];
-               if (!(line.isBlank() || line.isEmpty())) {
+               if (!(line.isBlank() || line.isEmpty()))
+               {
                   props = line.split(",");
                   for (var s : props)
                      s = s.trim();

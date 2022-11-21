@@ -9,6 +9,6 @@ public class Parada extends ParadaI
     @Override
     public void parar(RodadaI rodada)
     {
-        rodada.fim();
+        rodada.setFim(true);
     }
 }

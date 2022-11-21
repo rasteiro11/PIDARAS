@@ -1,13 +1,13 @@
 package controle;
 
-import entidades.AprendizI;
 import entidades.RodadaI;
 import entidades.TurmaI;
+import fronteira.CmdI;
 
 /**
  * AjudaI
  */
 public abstract class AjudaI
 {
-    public abstract void pedirAjuda(TurmaI<AprendizI> turma, RodadaI rodada);
+    public abstract boolean pedirAjuda(TurmaI turma, RodadaI rodada, CmdI tela);
 }

@@ -1,17 +1,17 @@
 package entidades;
 
-public interface RodadaI
+public abstract class RodadaI
 {
-   AprendizI getAprendizAtual();
-   PerguntaI getPerguntaAtual();
-   Grau getGrauPerguntaAtual();
-   void fim();
-   void setNextPergunta();
-   void setRespStatus(boolean status);
-   boolean getRespStatus();
-   void setFim(boolean bool);
-   boolean getFim();
-   void setAjuda(boolean bool);
-   boolean getAjuda(boolean bool);
-   void setAjudante(AprendizI ajudante);
+   public abstract AprendizI getAprendizAtual();
+   public abstract PerguntaI getPerguntaAtual();
+   public abstract Grau getGrauPerguntaAtual();
+   public abstract void setNextPergunta();
+   public abstract void setRespStatus(boolean status);
+   public abstract boolean getRespStatus();
+   public abstract void setFim(boolean bool);
+   public abstract boolean getFim();
+   public abstract void setAjuda(boolean bool);
+   public abstract boolean getAjuda();
+   public abstract void setAjudante(AprendizI ajudante);
+   public abstract AprendizI getAjudante();
 }

@@ -1,10 +1,7 @@
 package entidades;
-import controle.Sorteio;
 
-public class Rodada implements RodadaI
+public class Rodada extends RodadaI
 {
-   private TurmaI<AprendizI> historicoAprendizes;
-   private TurmaI<AprendizI> turma;
    private boolean ajuda;
    private boolean fim;
    private boolean resposta;
@@ -14,16 +11,17 @@ public class Rodada implements RodadaI
    private PerguntaI[] batchAtual;
    private int batchPtr;
 
-   public Rodada(QuestionarioI questionario, TurmaI<AprendizI> turma, TurmaI<AprendizI> historicoAprendizes)
+   public Rodada(QuestionarioI questionario, TurmaI turma, TurmaI historicoSorteados, AprendizI sorteado)
    {
-      this.turma = turma;
-      this.historicoAprendizes = historicoAprendizes;
       this.ajuda = false;
-      this.fim = false;
+      this.fim = sorteado.estaPresente();
       this.batchPtr = 0;
       this.ajudante = null;
       this.resposta = true;
-      this.aprendizAtual = new Sorteio<AprendizI>().sortearLista(this.turma.getAprendizes());
+
+      this.aprendizAtual = sorteado;
+      historicoSorteados.novoAprendiz(aprendizAtual);
+      turma.removerAprendiz(aprendizAtual);
 
       this.batchAtual = questionario.sortear();
       this.perguntaAtual = batchAtual[batchPtr];
@@ -41,6 +39,12 @@ public class Rodada implements RodadaI
    }
 
    @Override
+   public AprendizI getAjudante()
+   {
+      return this.ajudante;
+   }
+
+   @Override
    public Grau getGrauPerguntaAtual()
    {
       return perguntaAtual.getNivel();
@@ -50,37 +54,6 @@ public class Rodada implements RodadaI
    public PerguntaI getPerguntaAtual()
    {
       return this.perguntaAtual;
-   }
-
-   /*Move to Parada*/
-   @Override
-   public void fim()
-   {
-      this.historicoAprendizes.novoAprendiz(aprendizAtual);
-      this.turma.removerAprendiz(aprendizAtual);
-      this.fim = true;
-   }
-
-   @Override
-   public void setNextPergunta()
-   {
-      this.batchPtr++;
-      if(this.resposta == false)
-      {
-         this.setPontuacao(4);
-         this.fim();
-      }
-      else if (this.batchPtr < 3)
-      {
-         this.setPontuacao(this.perguntaAtual.getNivel().getGrau());
-         this.perguntaAtual = this.batchAtual[batchPtr];
-      }
-      else
-      {
-         System.out.println("\nTHIS BATCH ENDED\n");
-         this.setPontuacao(this.perguntaAtual.getNivel().getGrau());
-         this.fim();
-      }
    }
 
    @Override
@@ -105,7 +78,7 @@ public class Rodada implements RodadaI
    }
 
    @Override
-   public boolean getAjuda(boolean bool) {
+   public boolean getAjuda() {
       return this.ajuda;
    }
 
@@ -114,6 +87,26 @@ public class Rodada implements RodadaI
       this.ajuda = bool;
    }
 
+   @Override
+   public void setNextPergunta()
+   {
+      this.batchPtr++;
+      if(this.resposta == false)
+      {
+         this.setPontuacao(4);
+         this.setFim(true);
+      }
+      else if (this.batchPtr < 3)
+      {
+         this.setPontuacao(this.perguntaAtual.getNivel().getGrau());
+         this.perguntaAtual = this.batchAtual[batchPtr];
+      }
+      else
+      {
+         this.setPontuacao(this.perguntaAtual.getNivel().getGrau());
+         this.setFim(true);
+      }
+   }
 
    private void setPontuacao(int pontuacao)
    {
@@ -125,6 +118,7 @@ public class Rodada implements RodadaI
          aj_points = this.ajudante.getPontuacao();
          this.ajudante.setPontuacao(aj_points + pontuacao);
          this.ajudante = null;
+         this.ajuda = false;
       }
       this.aprendizAtual.setPontuacao(ap_points + pontuacao);
    }

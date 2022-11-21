@@ -1,7 +1,17 @@
+/*
+ * Arquivo: Aplicacao.java
+ * Data: 21/11/2022
+ * Nomes: Jonas Edward Tashiro, Luan Lopes Barbosa de Almeida,
+ *       Rafael Melloni Chacon Arnone
+ * Versao: feat-fronteira
+ * */
+
+
 import java.util.Random;
 
 import controle.Ajuda;
 import controle.Parada;
+import controle.Sorteio;
 import entidades.AprendizI;
 import entidades.Questionario;
 import entidades.Rodada;
@@ -9,7 +19,7 @@ import entidades.Turma;
 import fronteira.Cmd;
 
 /**
- * Aplicacao
+ * Aplicacao (Controle)
  */
 public class Aplicacao
 {
@@ -21,65 +31,52 @@ public class Aplicacao
         Ajuda ajuda = new Ajuda();
         Parada parada = new Parada();
         Cmd tela = new Cmd();
-
-        /*Pre n_sorteados*/
-        //System.out.println("n_sorteados Antes: ");
-        //for (AprendizI t: n_sorteados.getAprendizes())
-        //{
-        //    System.out.println(t.getNome()); 
-        //    System.out.println(t.getRa()); 
-        //    System.out.println(t.getPontuacao()); 
-        //}
-        //System.out.println();
+        Sorteio<AprendizI> sorteio = new Sorteio<>();
 
         while(n_sorteados.getAprendizes().size() > 0)
         {
-            Rodada rodada = new Rodada(questoes, n_sorteados, sorteados);
+            Rodada rodada = new Rodada(questoes, n_sorteados, sorteados, sorteio.sortearLista(n_sorteados.getAprendizes()));
+            tela.mostarAprendiz("\n\nO aprendiz sorteado foi: ",rodada.getAprendizAtual());
+
+            if(rodada.getFim() == false)
+                tela.mostarInformacao("\nEste aprendiz nao esta presente\n\n");
+
             while(rodada.getRespStatus() == true && rodada.getFim() == false)    // Rodada do Aprendiz
             {
                 int [] perm = criarPermutacao();    //Criar Classe para Permutacao, por enquanto serve para teste
 
-                /*Debug Permutation*/
-                //System.out.println("Permutation:");
-                //int j = 0;
-                //for (int i : perm)
-                //{
-                //    System.out.print(j);
-                //    System.out.print(" -> ");
-                //    System.out.println(i); 
-                //    j++;
-                //}
-
-                tela.monstarAprendiz(rodada.getAprendizAtual());
                 char escolha = tela.opcoesUsuario(rodada.getPerguntaAtual(), perm);
 
                 if(escolha == 'e')
                 {
                     /*Ajuda*/
-                    //System.out.println("Ajuda");
-                    //
-                    //indicar na fronteira quem foi o aluno sorteado para ajudar
-                    ajuda.pedirAjuda(n_sorteados, rodada);
+                    if(rodada.getAjuda() == false)
+                    {
+                        if(ajuda.pedirAjuda(n_sorteados, rodada,tela))  // se for possivel sortear indicar o sorteado
+                            tela.mostarAprendiz("O colega sorteado para ajudar foi: ", rodada.getAjudante());
+                    }
+                    else
+                        tela.mostarInformacao("\nAjudante ja foi escolido previamente\n");
                 }
                 else if (escolha == 'f')
                 {
                     /*Parada*/
-                    //System.out.println("Parada");
                     parada.parar(rodada); 
+                    tela.mostarAprendiz("O aprendiz:", rodada.getAprendizAtual());
+                    tela.mostarInformacao("Solicitou parada");
                 }
                 else  
                 {
-                    //System.out.println("\nescolha - > " + (escolha - 97));
-                    //System.out.println("\nperm[escolha - 97] - > " + perm[escolha - 97]);
-                    if(perm[escolha - 97] == 3)   //Aprendiz escolheu corretamente
+                    int i = escolha - 97;
+                    if(perm[i] == 3)   //Aprendiz escolheu corretamente (Alternativa[3] sempre e a resposta correta)
                     {
-                        /*funcao na fronteira para indicar resposta correta*/
-                        System.out.println("\nCORRECT ANSWER\n");
+                        tela.mostarInformacao("\nResposta Correta!\n\n\n\n");
                     }
                     else
                     {
-                        /*funcao na fronteira para indicar resposta incorreta*/
-                        System.out.println("\nINCORRECT ANSWER\n");
+                        tela.mostarInformacao("\nResposta Incorreta!");
+                        tela.mostarInformacao("A resposta correta era:");
+                        tela.mostarRespostaCorreta(rodada.getPerguntaAtual().getAlternativas()[i].getDescricao(),perm[i]);
                         rodada.setRespStatus(false);
                     }
                     rodada.setNextPergunta();
@@ -87,15 +84,7 @@ public class Aplicacao
             }
         }
 
-        /*Post n_sorteados*/
-        //colocar na fronteira
-        System.out.println("sorteados Antes: ");
-        for (AprendizI t: sorteados.getAprendizes())
-        {
-            System.out.println(t.getNome()); 
-            System.out.println(t.getRa()); 
-            System.out.println(t.getPontuacao()); 
-        }
+        tela.apresentarResultados(sorteados); 
     }
 
     public static int[] criarPermutacao()
@@ -110,7 +99,7 @@ public class Aplicacao
         int i = 3;
         while(i > 0)
         {
-            int j = rnd.nextInt(0, i);
+            int j = rnd.nextInt(i);
             aux = perm[i];
             perm[i] = perm[j];
             perm[j] = aux;
