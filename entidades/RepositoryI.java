@@ -2,7 +2,7 @@ package entidades;
 
 import java.util.List;
 
-public abstract class RepositoryI<Tipo>
+public interface RepositoryI<Tipo>
 {
    public abstract List<Tipo> carregarArquivo(String fileName);
 }

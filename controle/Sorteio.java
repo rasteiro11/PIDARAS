@@ -14,7 +14,7 @@ public class Sorteio<Tipo> extends SorteioI<Tipo>
    }
 
    @Override
-   public Tipo sortear(List<Tipo> lista)
+   public Tipo sortearLista(List<Tipo> lista)
    {
       return lista.get(rnd.nextInt(lista.size()));
    }

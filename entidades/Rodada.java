@@ -1,137 +1,125 @@
 package entidades;
 
-import java.util.List;
-import java.util.Random;
-
-import controle.Sorteio;
-
-public class Rodada implements RodadaI {
-
-   private QuestionarioI questionario;
-   private TurmaI<AprendizI> turma;
+public class Rodada extends RodadaI
+{
    private boolean ajuda;
-   private boolean desistir;
-   private boolean parar;
-   private List<PerguntaI> historicoPerguntas;
-   private List<AprendizI> historicoAprendizes;
+   private boolean fim;
+   private boolean resposta;
    private AprendizI aprendizAtual;
    private AprendizI ajudante;
    private PerguntaI perguntaAtual;
    private PerguntaI[] batchAtual;
    private int batchPtr;
 
-   public Rodada(QuestionarioI questionario, TurmaI<AprendizI> turma, List<PerguntaI> historicoPerguntas,
-         List<AprendizI> historicoAprendizes) {
-      this.questionario = questionario;
-      this.turma = turma;
-      this.historicoPerguntas = historicoPerguntas;
-      this.historicoAprendizes = historicoAprendizes;
+   public Rodada(QuestionarioI questionario, TurmaI turma, TurmaI historicoSorteados, AprendizI sorteado)
+   {
       this.ajuda = false;
-      this.desistir = false;
-      this.parar = false;
+      this.fim = sorteado.estaPresente();
       this.batchPtr = 0;
+      this.ajudante = null;
+      this.resposta = true;
 
-      this.aprendizAtual = new Sorteio<AprendizI>().sortear(this.turma.getAprendizes());
-      this.historicoAprendizes.add(this.aprendizAtual);
+      this.aprendizAtual = sorteado;
+      historicoSorteados.novoAprendiz(aprendizAtual);
+      turma.removerAprendiz(aprendizAtual);
 
-      // WARNINIG: DIVIDE INTO TWO LISTS(ALREADY SORTED AND NOT SORTED) IN APPLICATION
-      this.batchAtual = questionario.sortear(this.historicoPerguntas);
+      this.batchAtual = questionario.sortear();
       this.perguntaAtual = batchAtual[batchPtr];
-      batchPtr++;
    }
 
    @Override
-   public AprendizI getAprendizAtual() {
-      // Auto-generated method stub
+   public AprendizI getAprendizAtual()
+   {
       return this.aprendizAtual;
    }
 
    @Override
-   public Grau getGrauPerguntaAtual() {
-      // Auto-generated method stub
+   public void setAjudante(AprendizI ajudante) {
+      this.ajudante = ajudante;   
+   }
+
+   @Override
+   public AprendizI getAjudante()
+   {
+      return this.ajudante;
+   }
+
+   @Override
+   public Grau getGrauPerguntaAtual()
+   {
       return perguntaAtual.getNivel();
    }
 
    @Override
-   public List<AprendizI> getHistoricoDeAprendizes() {
-      // Auto-generated method stub
-      return this.historicoAprendizes;
-   }
-
-   @Override
-   public List<PerguntaI> getHistoricoDePerguntas() {
-      // Auto-generated method stub
-      return this.historicoPerguntas;
-   }
-
-   @Override
-   public PerguntaI getPerguntaAtual() {
-      // Auto-generated method stub
+   public PerguntaI getPerguntaAtual()
+   {
       return this.perguntaAtual;
    }
 
    @Override
-   public List<PerguntaI> getPerguntas() {
-      // Auto-generated method stub
-      return this.questionario.getPerguntas();
+   public void setRespStatus(boolean status)
+   {
+      this.resposta = status;
+   }
+   
+   @Override
+   public boolean getRespStatus()
+   {
+      return this.resposta;
+   }
+   @Override
+   public boolean getFim() {
+      return this.fim;
    }
 
    @Override
-   public void setAprendizAtual(AprendizI a) {
-      // Auto-generated method stub
-      this.aprendizAtual = a;
+   public void setFim(boolean bool) {
+      this.fim = bool;
    }
 
    @Override
-   public void setPerguntaAtual(PerguntaI p) {
-      // Auto-generated method stub
-      this.perguntaAtual = p;
-
+   public boolean getAjuda() {
+      return this.ajuda;
    }
 
    @Override
-   public void pedirAjuda() {
-      // Auto-generated method stub
-      Random r = new Random();
-      int rand;
-      AprendizI aprendizTemp;
+   public void setAjuda(boolean bool) {
+      this.ajuda = bool;
+   }
 
-      if (this.ajuda == false) {
-         do {
-            rand = r.nextInt(this.turma.getAprendizes().size());
-            aprendizTemp = this.turma.getAprendizes().get(rand);
-         } while (this.historicoAprendizes.contains(aprendizTemp));
-         this.ajudante = aprendizTemp;
-         this.aprendizAtual = this.ajudante;
+   @Override
+   public void setNextPergunta()
+   {
+      this.batchPtr++;
+      if(this.resposta == false)
+      {
+         this.setPontuacao(4);
+         this.setFim(true);
       }
-      this.ajuda = true;
-   }
-
-   @Override
-   public void desistir() {
-      // Auto-generated method stub
-      this.desistir = true;
-      this.parar = true;
-   }
-
-   @Override
-   public void getNextPergunta() {
-      // Auto-generated method stub
-      if (this.batchPtr < 3) {
-         this.batchPtr++;
+      else if (this.batchPtr < 3)
+      {
+         this.setPontuacao(this.perguntaAtual.getNivel().getGrau());
          this.perguntaAtual = this.batchAtual[batchPtr];
-      } else {
-         this.parar();
+      }
+      else
+      {
+         this.setPontuacao(this.perguntaAtual.getNivel().getGrau());
+         this.setFim(true);
       }
    }
 
-   @Override
-   public void parar() {
-      this.parar = true;
-   }
+   private void setPontuacao(int pontuacao)
+   {
 
-   @Override
-   public boolean getParar() {
-      return this.parar;
+      int aj_points = 0;
+      int ap_points = this.aprendizAtual.getPontuacao();
+      if(this.ajudante != null)
+      {
+         aj_points = this.ajudante.getPontuacao();
+         this.ajudante.setPontuacao(aj_points + pontuacao);
+         this.ajudante = null;
+         this.ajuda = false;
+      }
+      this.aprendizAtual.setPontuacao(ap_points + pontuacao);
    }
 }

@@ -9,7 +9,7 @@ public abstract class PerguntaI
    public abstract String getTema();
    public abstract void setNivel(Grau g);
    public abstract void setEnunciado(String enunciado);
-   public abstract void setResponsta(AlternativaI alternativa);
+   public abstract void setResposta(AlternativaI alternativa);
    public abstract void setAlternativas(AlternativaI alternativa, int index);
    public abstract void setTema(String tema);
 }

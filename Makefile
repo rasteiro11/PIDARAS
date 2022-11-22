@@ -1,6 +1,5 @@
-Compile: Liking 
+Run: Compile
+	java Aplicacao
+Compile: 
 	javac Aplicacao.java
-Liking: Packages
-Packages: 
-	javac ./entidades/*.java 
 
